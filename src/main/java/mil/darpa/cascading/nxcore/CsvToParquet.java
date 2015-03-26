@@ -2,9 +2,7 @@ package mil.darpa.cascading.nxcore;
 
 import cascading.flow.Flow;
 import cascading.flow.FlowConnector;
-import cascading.flow.FlowDef;
-import cascading.flow.hadoop.HadoopFlowConnector;
-import cascading.flow.local.LocalFlowConnector;
+import cascading.flow.hadoop2.Hadoop2MR1FlowConnector;
 import cascading.operation.Identity;
 import cascading.pipe.Each;
 import cascading.pipe.Pipe;
@@ -94,7 +92,7 @@ public class CsvToParquet {
                 .setJarClass(CsvToParquet.class)
                 .buildProperties();
 
-        FlowConnector flowConnector = new HadoopFlowConnector(properties);
+        FlowConnector flowConnector = new Hadoop2MR1FlowConnector(properties);
         Flow flow = flowConnector.connect( CSV_TO_PARQUET_ETL, source, sink, convert );
         flow.complete();
         
@@ -116,24 +114,5 @@ public class CsvToParquet {
         return "";
         
     }
-    
-    /*
-    private static class PackThriftFunction extends BaseOperation<Tuple> implements Function<Tuple> {
-
-        @Override
-        public void operate(FlowProcess flowProcess, FunctionCall functionCall) {
-            
-            TupleEntry arguments = functionCall.getArguments();
-            Tuple result = new Tuple();
-            
-            //Name name = new Name();
-            //name.setFirst_name(arguments.getString(0));
-            //name.setLast_name(arguments.getString(1));
-            //result.add(name);
-            
-            functionCall.getOutputCollector().add(result);
-            
-        } 
-    */
        
 }

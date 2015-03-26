@@ -1,4 +1,4 @@
-message ExgQuote {
+MESSAGE ExgQuote {
     REQUIRED string system_date;
     REQUIRED string system_time;
     REQUIRED string system_time_zone;
